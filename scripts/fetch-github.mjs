@@ -78,6 +78,12 @@ async function main() {
     contributions,
   }
 
+  // Only rewrite when the data changed, so local builds don't dirty git just to bump the timestamp.
+  const strip = ({ fetchedAt: _fetchedAt, ...rest }) => JSON.stringify(rest)
+  if (existsSync(OUT) && strip(JSON.parse(readFileSync(OUT, 'utf8'))) === strip(data)) {
+    console.log(`[github] no changes since last snapshot (${contributions.total} contributions)`)
+    return
+  }
   mkdirSync(dirname(OUT), { recursive: true })
   writeFileSync(OUT, `${JSON.stringify(data, null, 2)}\n`)
   console.log(
