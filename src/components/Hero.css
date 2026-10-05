@@ -1,0 +1,215 @@
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  min-height: 560px;
+  background-color: var(--base-400);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+}
+
+/* — full-bleed background scene (parallax layer: photo + ASCII canvas) — */
+.hero-scene {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  will-change: transform;
+}
+
+.hero-scene > *,
+.hero-shade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.hero-scene-img {
+  object-fit: cover;
+  object-position: 50% 50%; /* the ASCII grid reads this, so it always lines up with the photo */
+  opacity: 0; /* revealed by the intro once the ASCII wave has "compiled" the scene */
+}
+
+.hero-scene-canvas {
+  font-family: var(--font-mono);
+  font-size: 13px; /* sets the ASCII cell size */
+}
+
+/* Darkens the copy side for legibility and melts the bottom edge into the next section. */
+.hero-shade {
+  z-index: 0;
+  /* Overshoot the (clipped) bottom edge so no sub-pixel sliver of the moving scene shows through. */
+  height: calc(100% + 2px);
+  background:
+    linear-gradient(90deg, rgba(23, 23, 23, 0.92) 0%, rgba(23, 23, 23, 0.65) 32%, rgba(23, 23, 23, 0) 62%),
+    linear-gradient(0deg, var(--base-400) 0%, rgba(23, 23, 23, 0.85) 12%, rgba(23, 23, 23, 0) 40%),
+    linear-gradient(180deg, rgba(23, 23, 23, 0.55) 0%, rgba(23, 23, 23, 0) 22%);
+}
+
+/* Live readout for the code lens (coords + glyph under the lens). */
+.ascii-readout {
+  position: absolute;
+  z-index: 1;
+  right: 2rem;
+  bottom: 2rem;
+  pointer-events: none;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  color: var(--base-200);
+  font-variant-numeric: tabular-nums;
+  white-space: pre;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.ascii-readout.is-live {
+  opacity: 1;
+}
+
+/* — copy — */
+.hero-copy {
+  position: relative;
+  will-change: transform, opacity;
+  z-index: 1;
+  max-width: min(54rem, 62%);
+  padding: 2rem;
+  color: var(--base-100);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: -0.75rem;
+}
+
+/* Three fixed lines: lead / rotating phrase / tail. */
+.hero-title {
+  font-size: clamp(2.1rem, 5vw, 5.75rem);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+
+.hero-rotator {
+  color: var(--base-200);
+  white-space: nowrap;
+}
+
+/* Block caret after the rotating phrase — the terminal cursor. */
+.hero-caret {
+  display: inline-block;
+  width: 0.42em;
+  height: 0.78em;
+  margin-left: 0.1em;
+  vertical-align: -0.04em;
+  background-color: var(--base-200);
+  animation: caret-blink 1.1s steps(1) infinite;
+}
+
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Glyphs mid-decode while the phrase is switching. */
+.scramble-char {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  opacity: 0.6;
+}
+
+.hero-sub {
+  max-width: 40ch;
+  font-size: 1.05rem;
+  font-weight: 450;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin-top: -0.75rem;
+}
+
+.hero-eyebrow,
+.hero-sub,
+.hero-copy .btn {
+  position: relative;
+  transform: translateY(40px);
+  opacity: 0;
+}
+
+.hero-footer {
+  position: absolute;
+  z-index: 1;
+  bottom: 2rem;
+  left: 2rem;
+}
+
+.hero-footer p {
+  color: var(--text-muted);
+}
+
+.hero-footer .word-mask {
+  display: inline-block;
+  overflow: clip;
+  vertical-align: top;
+}
+
+.hero-footer .word {
+  display: inline-block;
+  transform: translateY(100%);
+}
+
+@media (max-width: 1000px) {
+  .hero {
+    align-items: flex-end;
+    padding-bottom: 5rem;
+  }
+
+  .hero-copy {
+    max-width: none;
+  }
+
+  /* Keep the desk + moon in frame on tall screens. */
+  .hero-scene-img {
+    object-position: 55% 50%;
+  }
+
+  .hero-scene-canvas {
+    font-size: 11px;
+  }
+
+  .hero-shade {
+    background:
+      linear-gradient(0deg, rgba(23, 23, 23, 0.96) 0%, rgba(23, 23, 23, 0.82) 46%, rgba(23, 23, 23, 0.15) 76%),
+      linear-gradient(180deg, rgba(23, 23, 23, 0.6) 0%, rgba(23, 23, 23, 0) 22%);
+  }
+
+  .hero-footer p {
+    color: var(--base-100);
+  }
+
+  .hero-sub {
+    font-size: 0.95rem;
+  }
+
+  /* The footer line sits where the readout would be on small screens. */
+  .ascii-readout {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-caret {
+    animation: none;
+  }
+}
