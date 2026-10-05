@@ -2,7 +2,9 @@ import { Fragment, useEffect, useRef, type Ref } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
-import heroBg from '../assets/hero-bg.webp'
+import heroBg800 from '../assets/hero-bg-800.webp'
+import heroBg1200 from '../assets/hero-bg-1200.webp'
+import heroBg1672 from '../assets/hero-bg-1672.webp'
 import { hero } from '../content'
 import HeroScene, { type SceneHandle } from './HeroScene'
 import { BlockLine } from './ui'
@@ -111,7 +113,11 @@ export default function Hero({ sceneRef }: { sceneRef: Ref<SceneHandle> }) {
 
   return (
     <section className="hero" id="top" ref={root}>
-      <HeroScene src={heroBg} ref={sceneRef} />
+      <HeroScene
+        src={heroBg1672}
+        srcSet={`${heroBg800} 800w, ${heroBg1200} 1200w, ${heroBg1672} 1672w`}
+        ref={sceneRef}
+      />
 
       <div className="hero-copy">
         <p className="hero-eyebrow">{hero.eyebrow}</p>

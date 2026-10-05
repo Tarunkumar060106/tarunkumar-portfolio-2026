@@ -14,7 +14,12 @@ export type SceneHandle = {
   startInteraction: () => void
 }
 
-type Props = { src: string; ref?: Ref<SceneHandle> }
+type Props = {
+  src: string
+  /** Responsive variants; the browser picks one and the ASCII sampler reads whichever it loaded. */
+  srcSet?: string
+  ref?: Ref<SceneHandle>
+}
 
 // Lens tuning
 const IDLE_MS = 2500 // no pointer movement for this long → the autopilot lens takes over
@@ -39,7 +44,7 @@ function objectPosition(img: HTMLImageElement) {
   return { posX: frac(x), posY: frac(y) }
 }
 
-export default function HeroScene({ src, ref }: Props) {
+export default function HeroScene({ src, srcSet, ref }: Props) {
   const imgRef = useRef<HTMLImageElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const readoutRef = useRef<HTMLParagraphElement>(null)
@@ -280,7 +285,16 @@ export default function HeroScene({ src, ref }: Props) {
     <>
       {/* Parallax layer: photo + ASCII canvas move together so they always line up. */}
       <div className="hero-scene" aria-hidden="true">
-        <img ref={imgRef} className="hero-scene-img" src={src} alt="" fetchPriority="high" decoding="async" />
+        <img
+          ref={imgRef}
+          className="hero-scene-img"
+          src={src}
+          srcSet={srcSet}
+          sizes="100vw"
+          alt=""
+          fetchPriority="high"
+          decoding="async"
+        />
         <canvas ref={canvasRef} className="hero-scene-canvas" />
       </div>
       {/* Static layers: the shade stays anchored so the bottom edge always melts into the next section. */}
