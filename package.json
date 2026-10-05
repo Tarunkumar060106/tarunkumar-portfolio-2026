@@ -7,7 +7,7 @@
     "dev": "vite",
     "github:sync": "node scripts/fetch-github.mjs",
     "prebuild": "node scripts/fetch-github.mjs",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
     "lint": "oxlint",
     "preview": "vite preview"
   },

@@ -2,6 +2,9 @@
 // Source: Tarunkumar S resume (2026).
 
 export const site = {
+  // Canonical URL used for SEO (canonical link, sitemap, Open Graph, structured data, llms.txt).
+  // Change this once the custom domain is live. Can also be overridden at build time with SITE_URL.
+  url: 'https://tarunkumar-portfolio-2026.vercel.app',
   name: 'Tarunkumar Sivakumar',
   role: 'Software engineer · AI',
   location: 'Chennai, India',
