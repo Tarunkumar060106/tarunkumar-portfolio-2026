@@ -189,10 +189,10 @@ export const experience: Role[] = [
     period: 'Aug 2026',
     role: 'Organizer',
     org: 'International RoboFest 2.0',
-    note: 'ISD Lab · SRMIST',
+    note: 'Website + organising · ISD Lab',
     href: 'https://robofest.in',
     description:
-      'Helped organise SRMIST’s international robotics competition: 9 event categories, a ₹7,00,000 prize pool and teams travelling in from outside India.',
+      'Built the official website, robofest.in, and helped organise SRMIST’s international robotics competition: 9 event categories, a ₹7,00,000 prize pool and teams travelling in from outside India.',
   },
   {
     period: 'Sep 2025',
