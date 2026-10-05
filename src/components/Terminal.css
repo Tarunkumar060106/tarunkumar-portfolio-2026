@@ -1,0 +1,144 @@
+/* A small playable terminal, sitting dark on the orange contact section. */
+.term {
+  margin-top: clamp(3rem, 6vw, 4.5rem);
+  max-width: 52rem;
+  border-radius: 6px;
+  background-color: var(--base-400);
+  color: var(--base-100);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  box-shadow: 0 24px 60px -24px rgba(23, 23, 23, 0.6);
+  cursor: text;
+  overflow: hidden;
+}
+
+.term-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.7rem 0.9rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.term-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.18);
+}
+
+.term-dot:first-child {
+  background-color: var(--base-200);
+}
+
+.term-title {
+  margin-left: auto;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.term-screen {
+  height: 15rem;
+  padding: 1rem 1rem 0.5rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.term-line {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 400;
+  line-height: inherit;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.term-line + .term-line {
+  margin-top: 0.35rem;
+}
+
+.term-out {
+  color: #d4d4d4;
+}
+
+.term-row {
+  display: block;
+}
+
+.term-prompt {
+  color: var(--base-200);
+  white-space: nowrap;
+}
+
+.term-accent {
+  color: var(--base-200);
+}
+
+.term-dim {
+  color: var(--text-muted);
+}
+
+.term-out a {
+  color: var(--base-100);
+  text-decoration: underline;
+  text-decoration-color: var(--base-200);
+  text-underline-offset: 0.2em;
+}
+
+.term-input-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
+.term-input {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--base-100);
+  font: inherit;
+  caret-color: var(--base-200);
+}
+
+.term:focus-within {
+  box-shadow:
+    0 0 0 2px var(--base-400),
+    0 24px 60px -24px rgba(23, 23, 23, 0.6);
+}
+
+.term-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 0.7rem 1rem 1rem;
+}
+
+.term-chip {
+  padding: 0.35rem 0.6rem;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.term-chip:hover,
+.term-chip:focus-visible {
+  color: var(--base-200);
+  border-color: var(--base-200);
+}
+
+.term-chip:focus-visible {
+  outline: none;
+}

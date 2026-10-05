@@ -1,0 +1,113 @@
+/* The closing section flips to the preloader's orange — the site ends the way it began. */
+.contact {
+  background-color: var(--base-200);
+  color: var(--base-400);
+  padding-bottom: 2rem;
+}
+
+.contact .section-head {
+  border-top-color: rgba(23, 23, 23, 0.25);
+  color: var(--base-400);
+}
+
+.contact .section-index {
+  color: var(--base-400);
+}
+
+/* On orange, the orange revealer block would be invisible — use the dark ink instead. */
+.contact .block-revealer.block-orange {
+  background-color: var(--base-400);
+}
+
+.contact-title {
+  max-width: 14ch;
+  font-family: var(--font-sans);
+  font-size: clamp(2.75rem, 7.5vw, 8rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.contact-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.contact-body {
+  max-width: 46ch;
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.contact .btn:focus-visible {
+  outline-color: var(--base-400);
+}
+
+.contact-socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2.5rem;
+  margin-top: clamp(4rem, 9vw, 8rem);
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(23, 23, 23, 0.25);
+}
+
+.contact-socials a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-sans);
+  font-size: clamp(1.25rem, 2.2vw, 2rem);
+  font-weight: 500;
+}
+
+.contact-socials svg {
+  width: 0.8em;
+  height: 0.8em;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.contact-socials a:hover svg,
+.contact-socials a:focus-visible svg {
+  transform: translate(3px, -3px);
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: clamp(4rem, 8vw, 7rem);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.footer p {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  font-variant-numeric: tabular-nums;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
