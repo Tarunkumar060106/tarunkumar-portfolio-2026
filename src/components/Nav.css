@@ -46,7 +46,56 @@
 
 .nav-cta {
   display: flex;
+  align-items: center;
   justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+/* ⌘K / Ctrl K hint that opens the command palette. */
+.nav-k {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.45rem 0.55rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 4px;
+  background-color: rgba(23, 23, 23, 0.55);
+  backdrop-filter: blur(6px);
+  color: var(--base-100);
+  cursor: pointer;
+  transition:
+    border-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.nav-k kbd {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.nav-k:hover,
+.nav-k:focus-visible {
+  border-color: var(--base-200);
+  color: var(--base-200);
+}
+
+.nav-k:focus-visible {
+  outline: 2px solid var(--base-200);
+  outline-offset: 2px;
+}
+
+.nav--on-accent .nav-k,
+.nav[data-menu-open='true'] .nav-k {
+  border-color: rgba(23, 23, 23, 0.4);
+  background-color: transparent;
+  color: var(--base-400);
+}
+
+@media (max-width: 560px) {
+  .nav-k {
+    display: none;
+  }
 }
 
 /* Over the orange contact section / open menu, the orange CTA would vanish — go dark. */

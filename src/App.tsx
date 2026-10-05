@@ -11,6 +11,8 @@ import type { SceneHandle } from './components/HeroScene'
 import { useIntroTimeline } from './hooks/useIntroTimeline'
 import { useScrollReveals } from './hooks/useScrollReveals'
 import { useInteractions } from './hooks/useInteractions'
+import { useSmoothScroll } from './hooks/useSmoothScroll'
+import CommandPalette from './components/CommandPalette'
 
 export default function App() {
   const root = useRef<HTMLDivElement>(null)
@@ -19,6 +21,7 @@ export default function App() {
   useIntroTimeline(root, scene)
   useScrollReveals(root)
   useInteractions(root)
+  useSmoothScroll()
 
   return (
     <div ref={root}>
@@ -32,6 +35,7 @@ export default function App() {
         <Experience />
         <Contact />
       </main>
+      <CommandPalette />
     </div>
   )
 }

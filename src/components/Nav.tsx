@@ -1,16 +1,28 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useSyncExternalStore, type MouseEvent } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import { nav, site } from '../content'
 import Logo from './Logo'
 import { ArrowUpRight } from './ui'
+import { scrollToTarget } from '../lib/scroll'
+import { OPEN_PALETTE } from '../lib/events'
 import './Nav.css'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
+// ⌘ on Apple devices, Ctrl elsewhere. The pre-rendered HTML says "Ctrl"; the browser corrects it after hydration.
+const noSubscribe = () => () => {}
+const useIsMac = () =>
+  useSyncExternalStore(
+    noSubscribe,
+    () => /Mac|iPhone|iPad/.test(navigator.userAgent),
+    () => false,
+  )
+
 export default function Nav() {
   const [open, setOpen] = useState(false)
+  const isMac = useIsMac()
   const navRef = useRef<HTMLElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
   const toggleRef = useRef<HTMLButtonElement>(null)
@@ -91,12 +103,21 @@ export default function Nav() {
 
   const close = () => setOpen(false)
 
+  // In-page links: close the menu, then scroll via the shared helper (works while Lenis is paused).
+  const go = (e: MouseEvent<HTMLAnchorElement>) => {
+    const href = e.currentTarget.getAttribute('href')
+    if (!href?.startsWith('#')) return
+    e.preventDefault()
+    close()
+    scrollToTarget(href)
+  }
+
   return (
     <>
       {/* className stays static: ScrollTrigger toggles .nav--on-accent imperatively, React owns data-menu-open. */}
       <nav className="nav" data-menu-open={open} ref={navRef} aria-label="Primary">
         <div className="nav-logo">
-          <a href="#top" aria-label={`${site.name}, home`} onClick={close}>
+          <a href="#top" aria-label={`${site.name}, home`} onClick={go}>
             <Logo />
           </a>
         </div>
@@ -115,17 +136,27 @@ export default function Nav() {
         </div>
 
         <div className="nav-cta">
-          <a href="#contact" className="btn" onClick={close}>
+          <button
+            type="button"
+            className="nav-k"
+            onClick={() => window.dispatchEvent(new Event(OPEN_PALETTE))}
+            aria-label="Open command palette"
+            aria-keyshortcuts="Control+K Meta+K"
+          >
+            <kbd>{isMac ? '⌘' : 'Ctrl'}</kbd>
+            <kbd>K</kbd>
+          </button>
+          <a href="#contact" className="btn" onClick={go}>
             Get in Touch
           </a>
         </div>
       </nav>
 
-      <div className="menu" id="site-menu" ref={menuRef} inert={!open}>
+      <div className="menu" id="site-menu" ref={menuRef} inert={!open} data-lenis-prevent>
         <ol className="menu-links">
           {nav.map((item, i) => (
             <li key={item.href}>
-              <a href={item.href} className="menu-link" onClick={close}>
+              <a href={item.href} className="menu-link" onClick={go}>
                 <span className="menu-link-inner">
                   <span className="menu-link-index">{String(i + 1).padStart(2, '0')}</span>
                   {item.label}
