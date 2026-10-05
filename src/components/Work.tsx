@@ -4,6 +4,7 @@ import { Flip } from 'gsap/Flip'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { projectFilters, projects } from '../content'
 import { ArrowUpRight, SectionHead } from './ui'
+import GitHubActivity from './GitHubActivity'
 import './Work.css'
 
 gsap.registerPlugin(Flip, ScrollTrigger)
@@ -114,6 +115,8 @@ export default function Work() {
           </li>
         ))}
       </ol>
+
+      <GitHubActivity />
     </section>
   )
 }
