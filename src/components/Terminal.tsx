@@ -172,7 +172,7 @@ export default function Terminal() {
         <span className="term-title">~/portfolio</span>
       </div>
 
-      <div className="term-screen" ref={screenRef} role="log" aria-live="polite" aria-label="Terminal output">
+      <div className="term-screen" ref={screenRef} data-lenis-prevent role="log" aria-live="polite" aria-label="Terminal output">
         {lines.map((l, i) =>
           l.kind === 'in' ? (
             <p className="term-line" key={i}>

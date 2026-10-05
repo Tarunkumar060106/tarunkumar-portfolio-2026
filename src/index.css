@@ -1,5 +1,6 @@
 @import '@fontsource-variable/manrope';
 @import '@fontsource-variable/jetbrains-mono';
+@import 'lenis/dist/lenis.css';
 
 :root {
   --base-100: #fff;
@@ -39,7 +40,9 @@ body {
 html.is-loading,
 html.is-loading body,
 html.menu-open,
-html.menu-open body {
+html.menu-open body,
+html.palette-open,
+html.palette-open body {
   overflow: hidden;
 }
 
