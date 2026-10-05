@@ -1,0 +1,148 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  transform: translateY(-300px);
+  will-change: transform;
+  z-index: 10;
+}
+
+.nav-logo,
+.nav-toggler,
+.nav-cta {
+  flex: 1;
+}
+
+/* The logo artwork is a black figure on a white rounded tile. */
+.nav-logo a {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 2.6rem;
+  border-radius: 8px;
+  background-color: var(--base-100);
+  color: var(--base-400);
+}
+
+.nav-logo svg {
+  width: 2rem;
+  height: 1.67rem;
+}
+
+.nav-toggler {
+  display: flex;
+  justify-content: center;
+}
+
+.nav-toggler .btn {
+  background-color: var(--base-400);
+  color: var(--base-100);
+}
+
+.nav-cta {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Over the orange contact section / open menu, the orange CTA would vanish — go dark. */
+.nav--on-accent .nav-cta .btn,
+.nav[data-menu-open='true'] .nav-cta .btn {
+  background-color: var(--base-400);
+  color: var(--base-100);
+}
+
+/* — full-screen menu — */
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 9;
+  visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 7rem 2rem 2rem;
+  overflow-y: auto;
+  background-color: var(--base-200);
+  color: var(--base-400);
+  --wipe: 90deg;
+  -webkit-mask: conic-gradient(from 0deg at 0% 100%, transparent var(--wipe), #000 var(--wipe));
+  mask: conic-gradient(from 0deg at 0% 100%, transparent var(--wipe), #000 var(--wipe));
+}
+
+.menu-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+}
+
+.menu-link {
+  display: block;
+  overflow: clip;
+  width: max-content;
+  font-family: var(--font-sans);
+  /* Bounded by height too, so all five links + the footer fit on short screens. */
+  font-size: clamp(2.25rem, min(8vw, 10svh), 7rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.menu-link-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.menu-link-index {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  margin-top: 0.9em;
+}
+
+.menu-link:hover .menu-link-inner,
+.menu-link:focus-visible .menu-link-inner {
+  transform: translateX(1.5rem);
+}
+
+.menu-link:focus-visible {
+  outline: 2px solid var(--base-400);
+  outline-offset: 4px;
+}
+
+.menu-foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.menu-foot ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.menu-foot a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.menu-foot svg {
+  width: 0.9rem;
+  height: 0.9rem;
+}
