@@ -1,0 +1,195 @@
+.roles {
+  position: relative;
+  border-bottom: 1px solid var(--line);
+}
+
+/* — timeline rail: a faint track with an orange fill scrubbed by scroll — */
+.roles-rail {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  background-color: var(--line);
+  list-style: none;
+  pointer-events: none;
+}
+
+.roles-rail-fill {
+  position: absolute;
+  inset: 0;
+  background-color: var(--base-200);
+  transform-origin: top center;
+  transform: scaleY(0);
+}
+
+.roles.is-static .roles-rail-fill {
+  transform: none;
+}
+
+.role {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.2fr) minmax(0, 1.5fr);
+  gap: 1rem 2.5rem;
+  padding: 2.25rem 0 2.25rem 1.75rem; /* left room for the timeline rail */
+  border-top: 1px solid var(--line);
+}
+
+.role-node {
+  position: absolute;
+  top: 2.6rem;
+  left: -4px;
+  width: 9px;
+  height: 9px;
+  border: 1px solid var(--text-muted);
+  border-radius: 50%;
+  background-color: var(--base-400);
+  transition:
+    background-color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.role.is-active .role-node,
+.roles.is-static .role-node {
+  border-color: var(--base-200);
+  background-color: var(--base-200);
+  box-shadow: 0 0 0 4px rgba(255, 89, 31, 0.18);
+}
+
+.role h3 {
+  transition: color 0.35s ease;
+}
+
+.role:hover h3 {
+  color: var(--base-200);
+}
+
+.role-period {
+  padding-top: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--base-200);
+}
+
+.role-head h3 {
+  font-family: var(--font-sans);
+  font-size: clamp(1.4rem, 2.2vw, 2rem);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.role-org {
+  margin-top: 0.6rem;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+.role-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--base-100);
+  text-decoration: underline;
+  text-decoration-color: var(--base-200);
+  text-underline-offset: 0.25em;
+  transition: color 0.25s ease;
+}
+
+.role-link svg {
+  width: 0.8rem;
+  height: 0.8rem;
+  color: var(--base-200);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.role-link:hover,
+.role-link:focus-visible {
+  color: var(--base-200);
+}
+
+.role-link:hover svg,
+.role-link:focus-visible svg {
+  transform: translate(2px, -2px);
+}
+
+.role-note {
+  display: block;
+  margin-top: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+}
+
+.role-desc {
+  font-size: 1rem;
+  font-weight: 450;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+/* — certifications — */
+.certs {
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 2.7fr);
+  gap: 1rem 2.5rem;
+  margin-top: clamp(3.5rem, 7vw, 6rem);
+}
+
+.certs-title {
+  padding-top: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--base-200);
+}
+
+.certs-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.cert {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+}
+
+.cert-name {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.cert-meta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+@media (max-width: 1000px) {
+  .certs,
+  .certs-list {
+    grid-template-columns: 1fr;
+  }
+
+  .role {
+    grid-template-columns: 1fr;
+  }
+
+  .role-period {
+    padding-top: 0;
+  }
+}
